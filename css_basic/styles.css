@@ -1,0 +1,62 @@
+
+
+body {
+    display: flex;
+    
+    min-height: 100vh; 
+}
+
+main {
+    display: flex;
+}
+
+
+body {
+    flex-direction: column; 
+}
+
+main {
+    flex-direction: row;    
+}
+
+
+main {
+    flex: auto; 
+}
+
+
+article {
+    flex: 2; 
+   
+    padding: 10px;
+    border: 1px solid #ddd; 
+}
+
+aside {
+    flex: 1; 
+   
+    padding: 10px;
+    border: 1px solid #ddd; 
+    margin-left: 10px; 
+}
+
+
+article, aside {
+    overflow-y: auto; 
+    
+    height: 100%; 
+}
+
+
+header, footer {
+    background-color: #e0e0e0;
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #ccc; 
+    border-top: 1px solid #ccc; 
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+}
