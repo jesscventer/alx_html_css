@@ -23,6 +23,9 @@
     --membership-heading-color: #FFFFFF; /* From Figma: white color for "membership" part */
     --membership-item-title-color: #FFFFFF; /* From Figma: "Lorem ipsum" title color */
     --membership-item-description-color: #FFFFFF; /* From Figma: "Lorem ipsum dolor sit..." description color */
+    --faq-text-color: #071629; /* From Figma: dark color for FAQ text */
+    --faq-bg-color: #FFFFFF; /* From Figma image: white background */
+}
     
 }
 
@@ -713,5 +716,86 @@ nav ul li a:hover {
         grid-template-columns: 1fr; /* Stack items vertically on mobile */
         max-width: 300px; /* Constrain width for mobile cards */
         padding: 0 16px; /* Smaller padding */
+    }
+}
+
+/* ==================== */
+/* FAQ Section Styling */
+/* ==================== */
+.faq-section {
+    background-color: var(--faq-bg-color); /* White background from Figma */
+    padding: 80px 0; /* Vertical padding */
+    text-align: center; /* Center the heading and grid */
+}
+
+.faq-section h2 {
+    /* Styles for "F.A.Q." from Figma export */
+    font-family: var(--font-family-source-sans-pro);
+    font-style: normal;
+    font-weight: 300; /* Light weight from Figma .text-2 */
+    font-size: 60px; /* Exact size from Figma .text-2 */
+    line-height: normal; /* As per Figma CSS `line-height: auto;` implies normal */
+    text-align: center;
+    color: var(--faq-text-color); /* Dark color from Figma .text-rgb-7-22-41 */
+    margin-bottom: 80px; /* Increased space below heading for better separation */
+}
+
+.faq-grid {
+    display: grid;
+    /* Two columns on desktop */
+    grid-template-columns: repeat(2, 1fr);
+    gap: 80px 40px; /* Large vertical gap, smaller horizontal gap */
+    max-width: 1000px; /* Approximate max width to contain the two columns */
+    margin: 0 auto; /* Center the grid */
+    padding: 0 20px; /* Horizontal padding for responsiveness */
+}
+
+.faq-column {
+    display: flex;
+    flex-direction: column; /* Stack items vertically within each column */
+    gap: 40px; /* Space between faq-items within a column */
+}
+
+.faq-item {
+    text-align: left; /* Text content is left-aligned */
+}
+
+.faq-item h3 {
+    /* Styles for "How does this work?" questions */
+    font-family: var(--font-family-source-sans-pro);
+    font-style: normal;
+    font-weight: 700; /* Bold from Figma .text-5 */
+    font-size: 16px; /* Exact size from Figma .text-5 */
+    line-height: normal; /* Default line-height */
+    color: var(--faq-text-color); /* Dark color from Figma */
+    margin-bottom: 20px; /* Space between question and answer */
+}
+
+.faq-item p {
+    /* Styles for "Lorem ipsum dolor sit amet..." answers */
+    font-family: var(--font-family-source-sans-pro);
+    font-style: normal;
+    font-weight: normal; /* Normal weight from Figma .text-4 */
+    font-size: 14px; /* Exact size from Figma .text-4 */
+    line-height: 24px; /* Exact line-height from Figma .text-4 */
+    color: var(--faq-text-color); /* Dark color from Figma */
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .faq-grid {
+        grid-template-columns: 1fr; /* Stack columns vertically on mobile */
+        gap: 40px; /* Consistent gap between stacked columns/items */
+        max-width: 500px; /* Constrain width for mobile view */
+        padding: 0 16px; /* Smaller padding */
+    }
+
+    .faq-section h2 {
+        font-size: 40px; /* Adjust heading size for mobile for better fit */
+        margin-bottom: 40px;
+    }
+    
+    .faq-column {
+        gap: 30px; /* Slightly reduce gap between items within a stacked column */
     }
 }
