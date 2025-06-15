@@ -11,6 +11,13 @@
     --button-shadow-color: rgba(0, 0, 0, 0.2);
     --specific-purple: #C271FF; 
     --quote-bg-purple: #9a65d6;
+    --tutorial-bg-white: #FFFFFF; /* New: Background for tutorial cards and section */
+    --tutorial-shadow-color: rgba(7, 22, 41, 0.178458); /* New: Card shadow color from Figma */
+    --dark-text-card: #071629; /* New: Dark text for card titles from Figma */
+    --light-dark-text-card: rgba(7, 22, 41, 0.501584); /* New: Light dark text for description from Figma */
+    --star-off-color: #D8D8D8; /* New: Color for unselected stars from Figma */
+    --play-button-overlay-bg: rgba(216, 216, 216, 0.25);
+    --play-button-triangle-color: #C271FF; /* New: Play button triangle color */
 }
 
 *, *::before, *::after {
@@ -352,5 +359,247 @@ nav ul li a:hover {
     }
     .text-4, .text-3, .text-2 {
         text-align: center; /* Center text for mobile column layout */
+    }
+}
+
+/* ==================== */
+/* Most Popular Tutorials Section Styling */
+/* ==================== */
+.popular-tutorials-section {
+    background-color: var(--tutorial-bg-white); /* White background for the section */
+    padding: 80px 0; /* Vertical padding */
+    text-align: center; /* Center the heading and grid */
+}
+
+.popular-tutorials-section h2 {
+    /* Styles for "Most popular tutorials" from Figma export */
+    font-family: var(--font-family-source-sans-pro);
+    font-style: normal;
+    font-weight: 300; /* Light weight */
+    font-size: 32px; /* Exact size from Figma */
+    line-height: 40px; /* Exact line-height from Figma */
+    text-align: center;
+    color: var(--dark-text-card); /* Dark color from Figma */
+    margin-bottom: 50px; /* Space below the heading */
+}
+
+/* NEW RULE FOR HIGHLIGHTED TEXT IN THIS SECTION */
+.popular-tutorials-section h2 .highlight-text {
+    color: var(--specific-purple); /* Apply the specific purple color */
+    font-weight: bold; /* Make it bold, similar to the other highlight */
+}
+
+.tutorials-grid {
+    display: grid;
+    /* Responsive grid: 4 columns for desktop, adapts down */
+    /* Adjusted max-width and gap to better fit 4 cards (255px each + 30px gap) = 1110px */
+    grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
+    gap: 10px; /* Space between tutorial cards */
+    max-width: 1140px; /* Adjusted max-width to allow 4 cards in a row with 30px gaps */
+    margin: 0 auto; /* Center the grid */
+    padding: 0 20px; /* Horizontal padding for responsiveness */
+}
+
+.tutorial-card {
+    background: var(--tutorial-bg-white); /* White background for the card */
+    box-shadow: 0px 2px 4px var(--tutorial-shadow-color); /* Shadow from Figma */
+    border-radius: 5px; /* Rounded corners for the card */
+    padding-bottom: 20px; /* Bottom padding within the card */
+    text-align: left; /* Text inside card aligns left */
+    position: relative; /* Essential for absolute positioning of play button */
+    overflow: hidden; /* Ensures rounded corners clip content, especially the image */
+    height: 335px; /* Exact height from Figma .tuto_1 */
+    width: 255px; /* Exact width from Figma .tuto_1 */
+    margin: 0 auto; /* Center card in its grid cell on smaller screens */
+}
+
+.tutorial-card .preview-image { /* Wrapper for the image and play button */
+    position: relative;
+    width: 100%;
+    height: 154px; /* Exact height from Figma 'preview' */
+    overflow: hidden; /* Ensures image and overlay are clipped by card radius */
+    border-radius: 5px 5px 0px 0px; /* Rounded top corners from Figma 'mask' */
+}
+
+.tutorial-card .preview-image img {
+    width: 100%; /* Make image fill the width of its wrapper */
+    height: 100%; /* Make image fill the height of its wrapper */
+    object-fit: cover; /* Cover the area */
+    display: block; /* Remove extra space below image */
+    margin-bottom: 0; /* Ensure no external margin */
+}
+
+/* Play button overlay and triangle (assuming HTML for this) */
+.tutorial-card .play-button-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Same height as .preview-image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--play-button-overlay-bg); /* White with opacity from Figma Oval */
+    border-radius: 5px 5px 0px 0px;
+}
+
+.tutorial-card .play-button-overlay .play-icon {
+    position: relative; /* For triangle positioning */
+    width: 64px; /* Exact width from Figma 'play' */
+    height: 64px; /* Exact height from Figma 'play' */
+    border-radius: 50%; /* Oval shape */
+    background-color: var(--text-white); /* White circle background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.tutorial-card .play-button-overlay .play-icon::before {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-top: 6.5px solid transparent; /* Half of 13px height */
+    border-bottom: 6.5px solid transparent;
+    border-left: 8px solid var(--play-button-triangle-color); /* Half of 16px width, color from Figma */
+    transform: translateX(1px); /* Small adjustment to optically center triangle */
+}
+
+
+/* Specific styling for elements within .tutorial-card (text content) */
+.tutorial-card .card-content {
+    padding: 0 13px; /* Horizontal padding for text content, from Figma's 'left' for text elements */
+}
+
+.tutorial-card h3 {
+    /* Styles for "Diagonal Smile", "Happy Smile", etc. */
+    font-family: var(--font-family-source-sans-pro);
+    font-style: normal;
+    font-weight: 700; /* Bold */
+    font-size: 16px; /* Exact size from Figma */
+    line-height: 20px; /* Exact line-height from Figma */
+    color: var(--dark-text-card); /* Dark color from Figma */
+    margin-top: 15px; /* Space from image */
+    margin-bottom: 8px; /* Space below title */
+}
+
+.tutorial-card p.description {
+    /* Styles for "Lorem ipsum dolor si" description */
+    font-family: var(--font-family-source-sans-pro);
+    font-style: normal;
+    font-weight: 400; /* Normal weight */
+    font-size: 14px; /* Exact size from Figma */
+    line-height: 24px; /* Exact line-height from Figma */
+    color: var(--light-dark-text-card); /* Faded dark color */
+    margin-bottom: 15px; /* Space below description */
+}
+
+.tutorial-card .author-info {
+    display: flex; /* Use flexbox to align avatar and name */
+    align-items: center; /* Vertically align them */
+    margin-bottom: 10px; /* Adjust margin */
+}
+
+.tutorial-card .author-info img {
+    /* Styles for 'avatar' */
+    width: 30px; /* Exact width from Figma */
+    height: 30px; /* Exact height from Figma */
+    border-radius: 50%; /* Circular avatar */
+    object-fit: cover;
+    margin-right: 10px; /* Space between avatar and name */
+    margin-bottom: 0; /* Remove bottom margin if flex item */
+}
+
+.tutorial-card .author-info h4 {
+    /* Styles for "Phillip Massey" */
+    font-family: var(--font-family-source-sans-pro);
+    font-style: normal;
+    font-weight: 600; /* Semi-bold */
+    font-size: 14px; /* Exact size from Figma */
+    line-height: 27px; /* Exact line-height from Figma */
+    color: var(--specific-purple); /* Purple color from Figma */
+}
+
+.tutorial-card .rating-time {
+    display: flex; /* Flexbox for stars and time */
+    justify-content: space-between; /* Push stars to left, time to right */
+    align-items: center; /* Vertically align */
+    margin-top: 15px; /* Space above rating/time block */
+    padding: 0 13px; /* Horizontal padding from card edge */
+}
+
+.tutorial-card .stars {
+    /* New styles for single rating.png image */
+    background-image: url('images/rating.png'); /* Use the single rating image */
+    background-size: contain; /* Ensure the whole image fits within the div */
+    background-repeat: no-repeat;
+    background-position: left center; /* Align to the left */
+    width: 107px; /* Exact width from Figma 'rating' group */
+    height: 15px; /* Exact height from Figma 'rating' group */
+    /* flex-grow: 1; /* Allow it to grow if needed */
+    /* display: flex; /* Removed as background image handles the stars */
+    /* align-items: center; */
+    /* gap: 3px; */
+}
+
+.tutorial-card .stars img { /* This rule will now be ignored as img tags are removed */
+    display: none; /* Hide any lingering img tags if present */
+}
+
+.tutorial-card .rating-time p {
+    /* Styles for "8 min" */
+    font-family: var(--font-family-source-sans-pro);
+    font-style: normal;
+    font-weight: 600; /* Semi-bold */
+    font-size: 14px; /* Exact size from Figma */
+    line-height: 27px; /* Exact line-height from Figma */
+    color: var(--specific-purple); /* Purple color from Figma */
+    text-align: right;
+    margin: 0; /* Remove any default margins on time text */
+}
+
+/* Media Queries (for responsiveness) */
+@media (max-width: 1440px) {
+    .text-1 {
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+
+@media (max-width: 1024px) { /* Adjust breakpoint if needed based on 3-column layout */
+    .tutorials-grid {
+        grid-template-columns: repeat(auto-fit, minmax(255px, 1fr)); /* Still adapt, but maybe fewer columns */
+        max-width: 800px; /* Smaller max-width for tablet-like screens to force fewer columns */
+    }
+}
+
+@media (max-width: 768px) {
+    .tutorials-grid {
+        grid-template-columns: 1fr; /* Stack cards vertically on mobile */
+        max-width: 300px; /* Example max width for mobile cards, allowing for centering */
+        padding: 0 16px; /* Smaller padding */
+    }
+    .tutorial-card {
+        width: 100%; /* Take full width of its mobile grid column */
+        height: auto; /* Allow height to adjust */
+    }
+    /* Quote section media query (from previous updates) */
+    .text-1 {
+        flex-direction: column;
+        text-align: center;
+        padding-left: 16px;
+        padding-right: 16px;
+        gap: 0;
+    }
+    .text-1 img {
+        margin-right: 0;
+        margin-bottom: 30px;
+    }
+    .quote-text-content {
+        text-align: center;
+    }
+    .text-4, .text-3, .text-2 {
+        text-align: center;
     }
 }
