@@ -18,6 +18,12 @@
     --star-off-color: #D8D8D8; /* New: Color for unselected stars from Figma */
     --play-button-overlay-bg: rgba(216, 216, 216, 0.25);
     --play-button-triangle-color: #C271FF; /* New: Play button triangle color */
+    --membership-bg: #071629; /* From Figma: dark blue background */
+    --membership-text-purple: #C271FF; /* From Figma: color for "Free" and smiles */
+    --membership-heading-color: #FFFFFF; /* From Figma: white color for "membership" part */
+    --membership-item-title-color: #FFFFFF; /* From Figma: "Lorem ipsum" title color */
+    --membership-item-description-color: #FFFFFF; /* From Figma: "Lorem ipsum dolor sit..." description color */
+    
 }
 
 *, *::before, *::after {
@@ -601,5 +607,111 @@ nav ul li a:hover {
     }
     .text-4, .text-3, .text-2 {
         text-align: center;
+    }
+}
+
+/* ==================== */
+/* Membership Section Styling */
+/* ==================== */
+.membership-section {
+    background-color: var(--membership-bg); /* Dark blue background from Figma */
+    padding: 80px 0; /* Vertical padding */
+    text-align: center; /* Center content horizontally */
+    color: var(--membership-heading-color); /* Default text color for the section */
+}
+
+.membership-section h2 {
+    font-family: var(--font-family-source-sans-pro);
+    font-style: normal;
+    font-weight: 300; /* Light weight for "membership" part */
+    font-size: 32px; /* Exact size from Figma */
+    line-height: 40px;
+    text-align: center;
+    color: var(--membership-heading-color); /* White color for "membership" */
+    margin-bottom: 50px; /* Space below the heading */
+}
+
+.membership-section h2 .highlight-text-membership {
+    color: var(--membership-text-purple); /* Purple color for "Free" from Figma */
+    font-weight: 700; /* Bold for "Free" from Figma */
+    /* Note: Figma also has font-size:32px for this span, matching the h2 */
+}
+
+.membership-benefits-grid {
+    display: grid;
+    /* 4 columns on desktop, adapts down for smaller screens */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px; /* Space between benefit items */
+    max-width: 1000px; /* Max width to contain the 4 items */
+    margin: 0 auto 50px auto; /* Center grid and add bottom margin before button */
+    padding: 0 20px; /* Horizontal padding */
+}
+
+.membership-benefits-grid > div {
+    text-align: center; /* Center content within each benefit item */
+    padding: 15px; /* Internal padding for each item */
+    /* No background or shadow on these divs based on Figma screenshot */
+}
+
+.membership-benefits-grid img {
+    width: 80px; /* Size of smile_2.png icon, estimated */
+    height: 80px; /* Height of smile_2.png icon, estimated */
+    object-fit: contain; /* Ensure the smile is fully visible */
+    margin-bottom: 20px; /* Space below the icon */
+    /* Figma has path-11, path-12, path-13 with fill: rgba(194, 113, 255, 1);
+       If smile_2.png is not purple, we might need to adjust or use SVG.
+       For now, assuming smile_2.png looks like the Figma icon. */
+}
+
+.membership-benefits-grid h3 {
+    /* Styles for "Lorem ipsum" title */
+    font-family: var(--font-family-source-sans-pro);
+    font-weight: normal; /* From Figma .text-9 */
+    font-size: 18px; /* From Figma .text-9 */
+    line-height: 26px; /* From Figma .text-9 */
+    color: var(--membership-item-title-color); /* White */
+    margin-bottom: 10px; /* Space between title and description */
+}
+
+.membership-benefits-grid p {
+    /* Styles for "Lorem ipsum dolor sit amet..." description */
+    font-family: var(--font-family-source-sans-pro);
+    font-weight: normal; /* From Figma .text-8 */
+    font-size: 14px; /* From Figma .text-8 */
+    line-height: 26px; /* From Figma .text-8 */
+    color: var(--membership-item-description-color); /* White */
+}
+
+/* Membership Section Button (OVERRIDING GLOBAL STYLES) */
+.membership-section button {
+    background-color: var(--specific-purple); /* Figma's button background color */
+    color: var(--text-white); /* Text color from Figma */
+    border: none; /* Remove any default border */
+    border-radius: 22px; /* From Figma's button_background-5 */
+    box-shadow: 0px 2px 20px 0px rgba(0,0,0,0.5); /* From Figma's button-4 */
+    font-family: var(--font-family-source-sans-pro); /* Ensure correct font family */
+    font-size: 14px; /* From Figma's text-6 */
+    font-weight: 600; /* Adjusted to 600 for better visibility, Figma stated normal but visual implies slightly bolder */
+    text-transform: uppercase; /* The provided image 'REGISTER FOR FREE' is uppercase */
+    padding: 12px 24px; /* Adjusted padding to fit new font size and match visual */
+    cursor: pointer; /* Indicate it's clickable */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Add hover transition */
+    margin-top: 50px; /* Space above the button */
+    margin-bottom: 80px; /* Consistent bottom padding for the section */
+}
+
+/* Add hover effect for the button */
+.membership-section button:hover {
+    background-color: #A052E2; /* Slightly darker purple on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+
+/* Media Queries for responsiveness for this section */
+@media (max-width: 768px) {
+    .membership-benefits-grid {
+        grid-template-columns: 1fr; /* Stack items vertically on mobile */
+        max-width: 300px; /* Constrain width for mobile cards */
+        padding: 0 16px; /* Smaller padding */
     }
 }
