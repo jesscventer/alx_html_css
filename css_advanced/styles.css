@@ -25,9 +25,16 @@
     --membership-item-description-color: #FFFFFF; /* From Figma: "Lorem ipsum dolor sit..." description color */
     --faq-text-color: #071629; /* From Figma: dark color for FAQ text */
     --faq-bg-color: #FFFFFF; /* From Figma image: white background */
+    --footer-bg-color: #071629; /* Dark blue background for footer from Figma export */
+    --copyright-text-opacity: 0.3516787588596344; /* Opacity for copyright text from Figma export */
+    --text-white: #FFFFFF; /* Ensure this is defined and is pure white */
+
+    /* For social icons, if they are white on a dark background: */
+    --social-icon-bg-dark: #071629; /* This matches footer-bg-color */
+    --social-icon-size: 24px; /* From Figma: combined-shape-12 width/height */
 }
-    
-}
+
+
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -799,3 +806,88 @@ nav ul li a:hover {
         gap: 30px; /* Slightly reduce gap between items within a stacked column */
     }
 }
+
+/* ==================== */
+/* Footer Styling */
+/* ==================== */
+footer {
+    background-color: var(--footer-bg-color); /* Dark blue background from Figma */
+    padding: 40px 0 20px 0; /* Top padding, no side padding, smaller bottom padding */
+    text-align: center; /* Center the copyright text */
+    color: var(--text-white); /* Default text color (for copyright and social icons) */
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between; /* Space out logo and social icons */
+    align-items: center; /* Vertically align them */
+    max-width: 1000px; /* Consistent with other sections */
+    margin: 0 auto; /* Center the content */
+    padding: 0 20px 30px 20px; /* Horizontal padding, bottom padding for space before copyright */
+}
+
+.footer-logo {
+    width: 180px; /* Width of the logo as seen in header */
+    height: auto;
+    display: block; /* Ensure it behaves as a block element */
+    /* If smile_logo.png does not contain "SmileSchool" text and you want to use the Coiny font,
+       you would remove this <img> and add a div/span with text and apply Coiny font to it.
+       For now, we assume smile_logo.png is the full logo. */
+}
+
+.social-media {
+    display: flex;
+    gap: 20px; /* Space between social icons */
+}
+
+.social-media a { /* Apply styles to the anchor tags around images */
+    display: flex; /* Make anchors flex containers for centering images */
+    justify-content: center;
+    align-items: center;
+    width: var(--social-icon-size); /* Set specific width for the icon area */
+    height: var(--social-icon-size); /* Set specific height for the icon area */
+    /* The screenshot shows white icons on a dark transparent background, or just white icons.
+       If your images (Facebook_White.png etc.) are already white, just size them.
+       If they need a circular background as per the Figma export's 'social_icons-10' which implies dark circles:
+       background-color: var(--social-icon-bg-dark);
+       border-radius: 50%;
+       box-shadow: 0px 0px 5px rgba(0,0,0,0.2); // Optional subtle shadow
+    */
+}
+
+.social-media img {
+    width: 100%; /* Make image fill its anchor container */
+    height: 100%; /* Make image fill its anchor container */
+    object-fit: contain; /* Ensure the icon itself is contained */
+    display: block; /* Remove any extra spacing */
+}
+
+.copyright {
+    font-family: var(--font-family-source-sans-pro);
+    font-weight: normal; /* From Figma .text-9 */
+    font-size: 12px; /* From Figma .text-9 */
+    color: var(--text-white); /* White color */
+    opacity: var(--copyright-text-opacity); /* Apply opacity from Figma .text-9 */
+    margin-top: 20px; /* Space from the social icons/logo section */
+}
+
+/* Media Queries for footer responsiveness */
+@media (max-width: 768px) {
+    /* ... (Existing media query rules for other sections) ... */
+
+    /* Footer adjustments for mobile */
+    footer {
+        padding-top: 30px; /* Slightly less top padding for mobile */
+        padding-bottom: 15px; /* Slightly less bottom padding for mobile */
+    }
+    .footer-content {
+        flex-direction: column; /* Stack logo and social media vertically on mobile */
+        gap: 30px; /* Space between stacked elements */
+        padding: 0 16px 20px 16px; /* Adjust padding for mobile */
+    }
+
+    .copyright {
+        margin-top: 20px; /* Adjust margin for mobile layout */
+    }
+}
+
