@@ -5,11 +5,12 @@
     font-size: 16px; 
     --primary-purple: #8A2BE2; 
     --dark-blue-bg: #071626; 
-    --text-white:  rgba(255, 255, 255, 1); 
+    --text-white: #FFFFFF; 
     --light-gray-text: #6F7175; 
     --header-overlay-darken: rgba(0, 0, 0, 0.4); 
     --button-shadow-color: rgba(0, 0, 0, 0.2);
     --specific-purple: #C271FF; 
+    --quote-bg-purple: #9a65d6;
 }
 
 *, *::before, *::after {
@@ -19,11 +20,22 @@
 }
 
 body {
-    font-family: "Source Sans Pro", sans-serif; 
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    font-family: var(--font-family-source-sans-pro);
     color: var(--text-white); 
     line-height: 1.6;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.text-white {
+    color: var(--text-white);
+}
 
 .container {
     max-width: 1000px; 
@@ -226,3 +238,119 @@ nav ul li a:hover {
     margin: 0 10px; 
 }
 
+/* ==================== */
+/* Quote Section Styling (Based on Figma Export - Refined Layout) */
+/* ==================== */
+
+.quote-section {
+    /* This outer section will now contain the flex container for the quote */
+    background-color: var(--quote-bg-purple); /* Background for the entire section */
+    padding: 80px 0; /* Vertical padding around the section content */
+    display: flex; /* Use flexbox to center its content */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+}
+
+/* Container for the quote content (image + text block) */
+.text-1 {
+    /* Removing background-color and padding-top/bottom here as it's now on .quote-section */
+    /* background-color: var(--quote-bg-purple); */
+    /* padding-top: 80px; */
+    /* padding-bottom: 80px; */
+    display: flex; /* Make this a flex container */
+    flex-direction: row; /* Default to row layout for desktop */
+    align-items: center; /* Vertically align items (image, text block) */
+    max-width: 900px; /* Max width of the content inside the purple bar */
+    width: 100%; /* Make it take full width up to max-width */
+    margin: 0 auto; /* Center the content block */
+    box-sizing: border-box;
+    padding-left: 24px; /* Default padding from Figma media query */
+    padding-right: 24px; /* Default padding from Figma media query */
+    gap: 50px; /* Estimated gap between image and text block */
+}
+
+/* Image styling for the person's avatar within .text-1 */
+.text-1 img {
+    flex-shrink: 0; /* Prevent image from shrinking */
+    width: 160px; /* Size of the person's avatar in the quote section */
+    height: 160px;
+    border-radius: 50%; /* Make the image circular */
+    object-fit: cover; /* Ensure image fills the circle */
+    /* margin-right: 50px; Removed as gap is now used */
+    margin-bottom: 0; /* No bottom margin in row layout */
+}
+
+
+/* Author's Title/Role Styling (p.text-2) */
+.text-2 {
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    font-family: var(--font-family-source-sans-pro);
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 33.6px;
+    text-decoration: none;
+    text-transform: none;
+    color: var(--text-white); /* Applied via .text-white class */
+    text-align: left; /* Keep left alignment for row layout */
+}
+
+/* Author's Name Styling (p.text-3) */
+.text-3 {
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    font-family: var(--font-family-source-sans-pro);
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 33.6px;
+    text-decoration: none;
+    text-transform: none;
+    color: var(--text-white); /* Applied via .text-white class */
+    margin-bottom: 5px; /* Space between name and title */
+    text-align: left; /* Keep left alignment for row layout */
+}
+
+/* Quote Text Styling (p.text-4) */
+.text-4 {
+    flex-grow: 1; /* Allow quote text to take available space in flex container */
+    flex-shrink: 1;
+    flex-basis: auto;
+    font-family: var(--font-family-source-sans-pro);
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 33.6px;
+    text-decoration: none;
+    text-transform: none;
+    color: var(--text-white); /* Applied via .text-white class */
+    margin-bottom: 10px; /* Space between quote and name */
+    text-align: left; /* Keep left alignment for row layout */
+}
+
+/* Media Queries for Responsiveness (from Figma export) */
+/* The media queries apply to .text-1's padding */
+@media (max-width: 1440px) {
+    .text-1 {
+        /* Already set to 24px in base rule, so this might be redundant unless it's a specific breakpoint change */
+        padding-left: 24px;
+        padding-right: 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .text-1 {
+        padding-left: 16px;
+        padding-right: 16px;
+        flex-direction: column; /* Stack image and text vertically for smaller screens */
+        text-align: center; /* Center content horizontally for column layout */
+    }
+    /* Adjustments for image and text alignment on mobile */
+    .text-1 img {
+        margin-right: 0; /* Remove right margin when stacked */
+        margin-bottom: 30px; /* Add bottom margin below image for spacing */
+    }
+    .text-4, .text-3, .text-2 {
+        text-align: center; /* Center text for mobile column layout */
+    }
+}
