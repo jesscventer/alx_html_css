@@ -1,0 +1,295 @@
+/* CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- Font Imports --- */
+/* Make sure your .otf font files are located in a 'fonts' directory relative to this CSS file */
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('./fonts/SourceSansPro-Regular.otf') format('opentype');
+    font-weight: normal; /* 400 */
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('./fonts/SourceSansPro-Bold.otf') format('opentype');
+    font-weight: bold; /* 700 */
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('./fonts/SourceSansPro-Black.otf') format('opentype');
+    font-weight: 900; /* Or a higher value like 900 for very heavy */
+    font-style: normal;
+    font-display: swap;
+}
+/* Add other Source Sans Pro weights/styles (Light, Extralight, Italic) as needed,
+   each with their own @font-face rule and corresponding font-weight/font-style */
+
+@font-face {
+    font-family: 'Spin Cycle OT';
+    src: url('./fonts/spincycle_ot.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* --- CSS Variables --- */
+:root {
+    --red-accent: #FF6565;
+    --white-text: #ffffff;
+    --dark-background: #071629; /* A common dark background color */
+    --light-grey-text: #E3E3E3; /* Lighter grey for subtext */
+}
+
+/* --- General Body & Container Styles --- */
+body {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    color: var(--white-text);
+    line-height: 1.6;
+    background-color: var(--dark-background); /* Default background */
+}
+
+.container {
+    max-width: 1000px; /* Max width for content */
+    margin: 0 auto;   /* Center the container */
+    padding: 0 20px;  /* Horizontal padding for smaller screens */
+}
+
+/* --- Header & Hero Section Styles --- */
+.hero-section {
+    min-height: 100vh; /* Make hero section at least full viewport height */
+    background-image: url('images/hero_background.jpg'); /* Replace with your actual background image filename */
+    background-size: cover; /* Cover the entire area */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column; /* Stack header content and hero content vertically */
+    justify-content: space-between; /* Push header-container to top, hero-content to center/bottom */
+    align-items: center; /* Center content horizontally */
+    padding-bottom: 50px; /* Space from bottom for content */
+    position: relative; /* For absolute positioning of overlay if needed */
+    z-index: 1; /* Ensure content is above potential overlay */
+}
+
+/* Optional: Semi-transparent overlay for better text readability on busy backgrounds */
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Dark overlay */
+    z-index: -1; /* Place behind content */
+}
+
+
+/* --- Header Nav Bar --- */
+.header-container {
+    display: flex;
+    justify-content: space-between; /* Logo on left, nav on right */
+    align-items: center; /* Vertically align items */
+    padding-top: 30px; /* Space from top */
+    width: 100%; /* Take full width of its parent container */
+}
+
+.logo img {
+    height: 32px; /* Set logo height based on Figma */
+    width: auto; /* Maintain aspect ratio */
+    display: block; /* Remove extra space below image */
+}
+
+.main-nav .nav-list {
+    display: flex;
+    list-style: none; /* Remove bullet points */
+    gap: 40px; /* Space between nav items */
+}
+
+.main-nav a {
+    color: var(--white-text);
+    text-decoration: none; /* Remove underline */
+    font-size: 12px; /* Based on Figma text styles */
+    font-weight: 600; /* Typically Semibold for nav */
+    transition: color 0.3s ease;
+}
+
+/* Links Hover/Active */
+.main-nav a:hover,
+.main-nav a:active {
+    color: var(--red-accent); /* Red accent color */
+}
+
+/* --- Hero Content --- */
+.hero-content {
+    text-align: center;
+    max-width: 600px; /* Max width for hero text block */
+    width: 100%;
+    padding: 20px; /* Padding for text on smaller screens */
+    margin-top: 50px; /* Space from header */
+    margin-bottom: auto; /* Push content towards center/top */
+    flex-grow: 1; /* Allow it to take available space */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content h1 {
+    font-family: 'Spin Cycle OT', 'Source Sans Pro', sans-serif; /* Apply Spin Cycle for main heading */
+    font-size: 44px; /* Adjust as per Figma */
+    font-weight: normal; /* Spin Cycle OT usually doesn't have multiple weights */
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero-content p:first-of-type { /* First paragraph right below H1 */
+    font-size: 16px;
+    font-weight: 700; /* Bold */
+    margin-bottom: 30px;
+}
+
+.button {
+    background-color: var(--red-accent);
+    color: var(--white-text);
+    padding: 12px 30px;
+    border: none;
+    border-radius: 20px; /* More rounded button */
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    text-decoration: none; /* In case it's a link styled as button */
+    display: inline-block; /* Allows padding and transitions better */
+    margin-bottom: 40px; /* Space below button */
+}
+
+/* Button Hover/Active */
+.button:hover,
+.button:active {
+    opacity: 0.9;
+}
+
+.hero-subtext {
+    font-size: 16px;
+    font-weight: normal; /* Regular weight */
+    color: var(--light-grey-text); /* Lighter color for subtext */
+    max-width: 650px;
+}
+
+
+/* --- Hamburger Menu (CSS-only) --- */
+.menu-toggle {
+    display: none; /* Hide the actual checkbox */
+}
+
+.hamburger-menu {
+    display: none; /* Hidden by default on desktop */
+    width: 30px;
+    height: 25px;
+    position: relative;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 100; /* Ensure it's above other content for clicking */
+}
+
+.hamburger-icon,
+.hamburger-icon::before,
+.hamburger-icon::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--white-text);
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger-icon::before {
+    transform: translateY(-8px);
+}
+
+.hamburger-icon::after {
+    transform: translateY(8px);
+}
+
+/* Transform hamburger icon to 'X' and show menu when checkbox is checked */
+.menu-toggle:checked + .hamburger-menu .hamburger-icon {
+    transform: rotate(45deg);
+}
+
+.menu-toggle:checked + .hamburger-menu .hamburger-icon::before {
+    transform: rotate(90deg) translate(8px, 0px);
+    opacity: 0; /* Hide middle line */
+}
+
+.menu-toggle:checked + .hamburger-menu .hamburger-icon::after {
+    transform: rotate(90deg) translate(-8px, 0px);
+    opacity: 0; /* Hide middle line */
+}
+
+.menu-toggle:checked ~ .main-nav {
+    display: flex; /* Show the nav menu */
+}
+
+
+/* --- Mobile Responsiveness (Max-width: 480px) --- */
+@media (max-width: 480px) {
+    .header-container {
+        padding: 20px; /* Adjust padding for mobile */
+    }
+
+    .main-nav {
+        display: none; /* Hide nav by default on mobile */
+        flex-direction: column;
+        position: absolute;
+        top: 0; /* Position full screen */
+        left: 0;
+        width: 100%;
+        height: 100vh; /* Full viewport height */
+        background-color: var(--dark-background); /* Overlay background */
+        justify-content: center;
+        align-items: center;
+        z-index: 99; /* Below hamburger icon, above other content */
+    }
+
+    .main-nav .nav-list {
+        flex-direction: column;
+        gap: 30px; /* More space between items */
+        text-align: center;
+    }
+
+    .main-nav a {
+        font-size: 20px; /* Larger font for mobile nav */
+    }
+
+    .hamburger-menu {
+        display: flex; /* Show hamburger menu on mobile */
+    }
+
+    .hero-content h1 {
+        font-size: 36px; /* Adjust heading size for mobile */
+    }
+
+    .hero-content p {
+        font-size: 14px; /* Adjust paragraph size for mobile */
+    }
+
+    .hero-subtext {
+        font-size: 14px;
+        padding: 0 15px; /* Add padding to subtext */
+    }
+
+    .button {
+        padding: 10px 25px;
+        font-size: 12px;
+    }
+}
