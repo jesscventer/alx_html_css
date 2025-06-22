@@ -1,0 +1,663 @@
+/* CSS Reset (Copied from previous task) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* --- Font Imports (Copied from previous task) --- */
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('./fonts/SourceSansPro-Regular.otf') format('opentype');
+    font-weight: normal; /* 400 */
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('./fonts/SourceSansPro-Bold.otf') format('opentype');
+    font-weight: bold; /* 700 */
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('./fonts/SourceSansPro-Black.otf') format('opentype');
+    font-weight: 900; /* Or a higher value like 900 for very heavy */
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Spin Cycle OT';
+    src: url('./fonts/spincycle_ot.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* --- Custom Icon Font Import (holberton_school-icon) --- */
+@font-face {
+    font-family: 'holberton_school-icon';
+    src: url('./fonts/holberton_school-icon.eot'); /* IE9 Compat Modes */
+    src: url('./fonts/holberton_school-icon.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('./fonts/holberton_school-icon.woff2') format('woff2'), /* Super Modern Browsers */
+         url('./fonts/holberton_school-icon.woff') format('woff'), /* Pretty Modern Browsers */
+         url('./fonts/holberton_school-icon.ttf') format('truetype'), /* Safari, Android, iOS */
+         url('./fonts/holberton_school-icon.svg#holberton_school-icon') format('svg'); /* Legacy iOS */
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+
+/* --- CSS Variables --- */
+:root {
+    --red-accent: #FF6565;
+    --white-text: #ffffff;
+    --dark-background: #071629;
+    --light-grey-text: #E3E3E3;
+    --section-bg-light: #F3F3F3;
+    --dark-grey-text: #343434;
+}
+
+/* --- General Body & Container Styles --- */
+body {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    color: var(--white-text);
+    line-height: 1.6;
+    background-color: var(--dark-background);
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* --- Header & Hero Section Styles --- */
+.hero-section {
+    min-height: 100vh;
+    background-image: url('images/hero_background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 50px;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    width: 100%;
+}
+
+.logo img {
+    height: 32px;
+    width: auto;
+    display: block;
+}
+
+.main-nav .nav-list {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+
+.main-nav a {
+    color: var(--white-text);
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.main-nav a:hover,
+.main-nav a:active {
+    color: var(--red-accent);
+}
+
+.hero-content {
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+    margin-top: 50px;
+    margin-bottom: auto;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-content h1 {
+    font-family: 'Spin Cycle OT', 'Source Sans Pro', sans-serif;
+    font-size: 44px;
+    font-weight: normal;
+    line-height: 1.2;
+    margin-bottom: 20px;
+}
+
+.hero-content p:first-of-type {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.button { /* Reusable button style */
+    background-color: var(--red-accent);
+    color: var(--white-text);
+    padding: 12px 30px;
+    border: none;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 40px;
+    white-space: nowrap; /* Prevent text wrapping on all screen sizes */
+}
+
+.button:hover,
+.button:active {
+    opacity: 0.9;
+}
+
+.hero-subtext {
+    font-size: 16px;
+    font-weight: normal;
+    color: var(--light-grey-text);
+    max-width: 650px;
+}
+
+/* --- Hamburger Menu (JavaScript Controlled) --- */
+.menu-toggle {
+    display: none; /* Hide the actual checkbox */
+}
+
+.hamburger-menu {
+    display: none; /* Hidden by default on desktop, shown in media query */
+    width: 30px;
+    height: 25px;
+    position: relative;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 100;
+}
+
+.hamburger-icon,
+.hamburger-icon::before,
+.hamburger-icon::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 3px;
+    background-color: var(--white-text);
+    border-radius: 3px;
+    transition: all 0.3s ease-in-out;
+}
+
+.hamburger-icon::before {
+    transform: translateY(-8px);
+}
+
+.hamburger-icon::after {
+    transform: translateY(8px);
+}
+
+/* JavaScript-controlled hamburger icon animation */
+.hamburger-menu.is-active .hamburger-icon {
+    transform: rotate(45deg);
+}
+
+.hamburger-menu.is-active .hamburger-icon::before {
+    transform: rotate(90deg) translate(8px, 0px);
+    opacity: 0;
+}
+
+.hamburger-menu.is-active .hamburger-icon::after {
+    transform: rotate(90deg) translate(-8px, 0px);
+    opacity: 0;
+}
+
+/* JavaScript-controlled mobile navigation menu */
+@media (max-width: 480px) {
+    .main-nav {
+        display: none; /* Hidden by default on mobile, now controlled by JS */
+        flex-direction: column;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--dark-background);
+        justify-content: center;
+        align-items: center;
+        z-index: 99;
+        /* Add transition for smooth opening/closing */
+        transition: transform 0.3s ease-in-out;
+        transform: translateX(100%); /* Start off-screen to the right */
+    }
+
+    .main-nav.menu-open { /* Class added by JavaScript when menu is active */
+        display: flex; /* Override display: none; */
+        transform: translateX(0); /* Slide into view */
+    }
+}
+
+
+/* --- "What We Do" Section Styles --- */
+.what-we-do-section {
+    background-color: var(--white-text);
+    color: var(--dark-grey-text);
+    padding: 80px 0;
+    text-align: center;
+}
+
+.section-title { /* Reusable section title style */
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.section-description { /* Reusable section description style */
+    font-size: 16px;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto 70px auto;
+}
+
+.features-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px 20px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.feature-item {
+    flex: 1 1 200px;
+    min-width: 200px;
+    max-width: 240px;
+    text-align: center;
+    padding: 20px;
+    /* Added for animation */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Animation for "What We Do" items on hover */
+.feature-item:hover {
+    transform: translateY(-5px) scale(1.03); /* Lift slightly and scale up */
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Icon Styling */
+.holberton_school-icon {
+    font-family: 'holberton_school-icon';
+    font-size: 80px;
+    color: var(--red-accent);
+    line-height: 1;
+    display: inline-block;
+    vertical-align: middle;
+    margin-bottom: 20px;
+}
+
+.holberton_school-icon-ic_sound::before {
+    content: "\e90e";
+}
+.holberton_school-icon-ic_video::before {
+    content: "\e910";
+}
+.holberton_school-icon-ic_music::before {
+    content: "\e90d";
+}
+.holberton_school-icon-ic_hearing::before {
+    content: "\e909";
+}
+
+.feature-item h3 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: var(--dark-grey-text);
+}
+
+.feature-item p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #777;
+}
+
+/* --- "Our Results" Section Styles --- */
+.our-results-section {
+    background-image: url('images/headphones_hero_2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    color: var(--white-text);
+    padding: 80px 0;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.our-results-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+}
+
+.our-results-section .section-title {
+    margin-bottom: 20px;
+}
+
+.our-results-section .section-description {
+    margin-bottom: 70px;
+}
+
+.results-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.result-card {
+    width: 190px;
+    height: 190px;
+    background-color: var(--red-accent);
+    clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0% 35%);
+    -webkit-clip-path: polygon(50% 0%, 100% 35%, 80% 100%, 20% 100%, 0% 35%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    /* Added for animation */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+/* Animation for "Our Results" items on hover */
+.result-card:hover {
+    transform: scale(1.1);
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+
+.result-percentage {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 46px;
+    font-weight: bold;
+    line-height: 1;
+    margin-bottom: 5px;
+}
+
+.result-description {
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.4;
+}
+
+/* --- "Contact us" Section Styles --- */
+.contact-us-section {
+    background-color: var(--white-text);
+    color: var(--dark-grey-text);
+    padding: 80px 0;
+    text-align: center;
+}
+
+.contact-form {
+    max-width: 335px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-group {
+    width: 100%;
+    margin-bottom: 40px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: var(--dark-grey-text);
+    margin-bottom: 5px;
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group textarea {
+    width: 100%;
+    padding: 10px 0;
+    border: none;
+    border-bottom: 1px solid var(--dark-background);
+    background-color: transparent;
+    font-family: 'Source Sans Pro', Arial, sans-serif;
+    font-size: 14px;
+    color: var(--dark-grey-text);
+    outline: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #888;
+    opacity: 1;
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 29px;
+}
+
+.contact-us-section .button {
+    margin-top: 25px;
+    margin-bottom: 0;
+    width: 162px;
+    height: 44px;
+    border-radius: 22px;
+    filter: drop-shadow(0px 2px 20px rgba(0,0,0,0.5));
+}
+
+/* --- Footer Section Styles --- */
+.main-footer {
+    background-color: var(--dark-background);
+    color: var(--white-text);
+    padding: 40px 0;
+}
+
+.footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.footer-logo img {
+    height: 32px;
+    width: auto;
+    display: block;
+}
+
+.social-icons {
+    display: flex;
+    gap: 20px;
+}
+
+.social-icons a {
+    color: var(--white-text);
+    font-size: 24px;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: var(--red-accent);
+}
+
+.copyright-text {
+    font-size: 12px;
+    color: var(--white-text);
+    flex-basis: 100%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/* --- Mobile Responsiveness (Max-width: 480px) --- */
+@media (max-width: 480px) {
+    .header-container {
+        padding: 20px;
+    }
+
+    .hamburger-menu {
+        display: flex; /* Show hamburger on mobile */
+    }
+
+    /* REMOVED: .menu-toggle:checked ~ .main-nav { display: flex; } */
+    /* This rule is now replaced by .main-nav.menu-open { display: flex; } */
+    /* ... (other mobile styles unchanged) ... */
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .hero-content p {
+        font-size: 14px;
+    }
+
+    .hero-subtext {
+        font-size: 14px;
+        padding: 0 15px;
+    }
+
+    .button {
+        padding: 10px 25px;
+        font-size: 12px;
+        white-space: nowrap;
+        min-width: fit-content;
+    }
+
+    /* Mobile specific styles for "What We Do" section */
+    .what-we-do-section {
+        padding: 60px 0;
+    }
+
+    .section-title {
+        font-size: 28px;
+    }
+
+    .section-description {
+        font-size: 14px;
+        margin-bottom: 50px;
+    }
+
+    .features-grid {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .feature-item {
+        flex: 1 1 100%;
+        max-width: 300px;
+        margin: 0 auto;
+    }
+
+    /* Mobile specific styles for "Our Results" section */
+    .our-results-section {
+        padding: 60px 0;
+    }
+
+    .results-grid {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .result-card {
+        margin: 0 auto;
+    }
+
+    /* Mobile specific styles for "Contact us" section */
+    .contact-us-section {
+        padding: 60px 20px;
+    }
+
+    .contact-form {
+        max-width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .contact-us-section .button {
+        width: 100%;
+    }
+
+    /* Mobile specific styles for Footer */
+    .main-footer {
+        padding: 30px 0;
+    }
+
+    .footer-content {
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .social-icons {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .copyright-text {
+        text-align: center;
+        margin-top: 0;
+    }
+}
